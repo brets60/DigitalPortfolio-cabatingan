@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { GithubIcon } from './Icons';
 
 interface NavbarProps {
   onOpenResume?: () => void;
@@ -16,7 +15,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
-    { name: 'GitHub', href: '#github' },
     { name: 'Experience', href: '#experience' },
     { name: 'How I Build', href: '#process' },
     { name: 'Education', href: '#education' },
@@ -31,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         setIsScrolled(false);
       }
 
-      const sections = ['hero', 'about', 'skills', 'github', 'experience', 'process', 'education', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'experience', 'process', 'education', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -119,19 +117,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
 
         {/* Right CTA Actions */}
         <div className="hidden sm:flex items-center gap-3">
-          <motion.a
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.95 }}
-            href="https://github.com/brets60"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg text-[#94A3B8] hover:text-white bg-[#111A28] hover:bg-[#162235] border border-white/10 transition-colors"
-            title="GitHub Profile @brets60"
-            data-interactive="true"
-          >
-            <GithubIcon className="w-4 h-4" />
-          </motion.a>
-
           {onOpenResume && (
             <motion.button
               whileHover={{ scale: 1.04 }}
@@ -160,13 +145,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         {/* Mobile Hamburger Button */}
         <div className="flex sm:hidden items-center gap-2">
           <a
-            href="https://github.com/brets60"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1.5 rounded-lg text-[#94A3B8] bg-[#111A28] border border-white/10"
-            title="GitHub @brets60"
+            href="#contact"
+            onClick={(e) => handleLinkClick(e, '#contact')}
+            className="px-3 py-1.5 rounded-md text-xs font-medium text-white bg-[#1D4ED8]"
           >
-            <GithubIcon className="w-4 h-4" />
+            Talk
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -202,15 +185,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
               ))}
 
               <div className="pt-3 border-t border-white/10 flex flex-col gap-2 mt-2">
-                <a
-                  href="https://github.com/brets60"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full text-center py-2.5 rounded-lg text-sm font-medium text-white bg-[#111A28] border border-white/10 flex items-center justify-center gap-2"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                  <span>GitHub @brets60</span>
-                </a>
                 {onOpenResume && (
                   <button
                     onClick={() => {
