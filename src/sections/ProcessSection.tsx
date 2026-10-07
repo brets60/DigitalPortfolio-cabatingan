@@ -39,22 +39,22 @@ export const ProcessSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 22 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
   return (
-    <section id="process" className="py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06]">
+    <section id="process" className="py-16 sm:py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -63,16 +63,16 @@ export const ProcessSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl mb-16"
+          className="max-w-2xl mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>Methodology</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-2 sm:mb-4">
             How I Build
           </h2>
-          <p className="text-base text-[#94A3B8]">
+          <p className="text-xs sm:text-sm md:text-base text-[#94A3B8]">
             A disciplined, iterative engineering process applied to every software application and network infrastructure project.
           </p>
         </motion.div>
@@ -83,24 +83,24 @@ export const ProcessSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative"
         >
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
               whileHover={{
-                y: -6,
+                y: -5,
                 borderColor: 'rgba(59, 130, 246, 0.4)',
                 transition: { duration: 0.2 },
               }}
-              className="group relative p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.06] transition-all flex flex-col justify-between"
+              className="group relative p-5 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.06] transition-all flex flex-col justify-between"
               data-interactive="true"
             >
               <div>
                 {/* Number & Icon */}
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-2xl font-extrabold text-[#60A5FA]">
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <span className="font-mono text-xl sm:text-2xl font-extrabold text-[#60A5FA]">
                     {step.number}
                   </span>
                   <div className="p-2 rounded-xl bg-white/[0.03] border border-white/[0.05] group-hover:scale-110 transition-transform">
@@ -109,10 +109,10 @@ export const ProcessSection: React.FC = () => {
                 </div>
 
                 {/* Step Title & Subtitle */}
-                <h3 className="text-lg font-bold text-white tracking-tight mb-1 group-hover:text-[#60A5FA] transition-colors">
+                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight mb-1 group-hover:text-[#60A5FA] transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-3">
+                <p className="text-[10px] sm:text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-2 sm:mb-3">
                   {step.subtitle}
                 </p>
 
@@ -123,7 +123,7 @@ export const ProcessSection: React.FC = () => {
               </div>
 
               {/* Step indicator footer */}
-              <div className="mt-6 pt-4 border-t border-white/[0.05] flex items-center justify-between text-[11px] text-[#64748B]">
+              <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-white/[0.05] flex items-center justify-between text-[11px] text-[#64748B]">
                 <span>Phase {step.number}</span>
                 <span className="font-mono text-[#3B82F6]">verified ›</span>
               </div>

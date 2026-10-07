@@ -37,7 +37,6 @@ export const ContactSection: React.FC = () => {
       setIsSubmitting(false);
       setIsSubmitted(true);
 
-      // Trigger subtle celebratory confetti burst
       try {
         confetti({
           particleCount: 50,
@@ -60,7 +59,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06]">
+    <section id="contact" className="py-16 sm:py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -69,47 +68,47 @@ export const ContactSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl mb-14"
+          className="max-w-2xl mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Initiate Communication</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2 sm:mb-3">
             Have an idea in mind?
           </h2>
-          <p className="text-lg text-[#94A3B8]">
+          <p className="text-sm sm:text-lg text-[#94A3B8]">
             Let's turn it into something useful.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Direct Contact Details & Quick Links (5 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4 sm:space-y-6 w-full"
           >
-            <div className="p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
-              <h3 className="text-base font-bold text-white mb-4">
+            <div className="p-5 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
+              <h3 className="text-sm sm:text-base font-bold text-white mb-4">
                 Direct Contact Information
               </h3>
 
-              <div className="space-y-4 text-xs sm:text-sm">
+              <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                 {/* Email Item */}
-                <div className="p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-center justify-between group">
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <div className="p-2 rounded-lg bg-[#3B82F6]/10 text-[#60A5FA]">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-center justify-between group">
+                  <div className="flex items-center gap-2.5 sm:gap-3 overflow-hidden min-w-0">
+                    <div className="p-2 rounded-lg bg-[#3B82F6]/10 text-[#60A5FA] shrink-0">
                       <Mail className="w-4 h-4" />
                     </div>
-                    <div className="truncate">
+                    <div className="min-w-0">
                       <div className="text-[10px] text-[#64748B] uppercase font-semibold">Email Address</div>
                       <a
                         href={`mailto:${contactEmail}`}
-                        className="text-white hover:text-[#60A5FA] transition-colors truncate block font-mono"
+                        className="text-white hover:text-[#60A5FA] transition-colors truncate block font-mono text-[11px] sm:text-xs"
                       >
                         {contactEmail}
                       </a>
@@ -127,16 +126,16 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Phone Item */}
-                <div className="p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-center justify-between group">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-center justify-between group">
+                  <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0">
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="text-[10px] text-[#64748B] uppercase font-semibold">Phone / Mobile</div>
                       <a
                         href={`tel:${contactPhone.replace(/\s+/g, '')}`}
-                        className="text-white hover:text-emerald-400 transition-colors font-mono"
+                        className="text-white hover:text-emerald-400 transition-colors font-mono text-xs"
                       >
                         {contactPhone}
                       </a>
@@ -154,7 +153,7 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Location Item */}
-                <div className="p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-start gap-3">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-[#0D1420] border border-white/[0.05] flex items-start gap-2.5 sm:gap-3">
                   <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
@@ -167,13 +166,13 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Direct Buttons */}
-              <div className="mt-6 pt-5 border-t border-white/[0.06] flex flex-wrap gap-2.5">
+              {/* Direct Buttons: stack on mobile */}
+              <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-white/[0.06] flex flex-col sm:flex-row gap-2.5">
                 <motion.a
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                   href={`mailto:${contactEmail}`}
-                  className="flex-1 py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] transition-colors"
+                  className="w-full py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] transition-colors"
                   data-interactive="true"
                 >
                   Email Me
@@ -182,7 +181,7 @@ export const ContactSection: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                   href="#contact-form"
-                  className="flex-1 py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#0D1420] hover:bg-[#162235] border border-white/10 transition-colors"
+                  className="w-full py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#0D1420] hover:bg-[#162235] border border-white/10 transition-colors"
                   data-interactive="true"
                 >
                   Let's Work Together
@@ -191,8 +190,8 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* Social Connectivity */}
-            <div className="p-6 rounded-2xl bg-[#111A28] border border-white/[0.08]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#111A28] border border-white/[0.08]">
+              <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
                 Social Profiles & Networks
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -238,17 +237,17 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Column: Interactive Contact Form (7 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
             id="contact-form"
-            className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+            className="lg:col-span-7 p-5 sm:p-7 md:p-8 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)] w-full"
           >
-            <h3 className="text-xl font-bold text-white mb-2">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">
               Send a Direct Message
             </h3>
-            <p className="text-xs sm:text-sm text-[#94A3B8] mb-6">
+            <p className="text-xs sm:text-sm text-[#94A3B8] mb-5 sm:mb-6">
               Whether you have a job vacancy, network setup inquiry, project collaboration, or question, feel free to drop a line.
             </p>
 
@@ -256,19 +255,19 @@ export const ContactSection: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-8 rounded-xl bg-[#0D1420] border border-emerald-500/30 text-center space-y-4"
+                className="p-6 sm:p-8 rounded-xl bg-[#0D1420] border border-emerald-500/30 text-center space-y-4"
               >
                 <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-lg font-bold text-white">Message Prepared!</h4>
+                <h4 className="text-base sm:text-lg font-bold text-white">Message Prepared!</h4>
                 <p className="text-xs sm:text-sm text-[#CBD5E1] max-w-md mx-auto">
                   Thank you, <strong className="text-white">{formData.name}</strong>. Your message is recorded. You can also open your email client to send it directly to John Angelo.
                 </p>
-                <div className="pt-2 flex flex-wrap justify-center gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3">
                   <button
                     onClick={handleOpenMailto}
-                    className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] shadow-sm"
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] shadow-sm"
                   >
                     Open in Default Mail Client
                   </button>
@@ -277,17 +276,17 @@ export const ContactSection: React.FC = () => {
                       setIsSubmitted(false);
                       setFormData({ name: '', email: '', subject: '', message: '' });
                     }}
-                    className="px-5 py-2.5 rounded-xl text-xs font-medium text-[#94A3B8] hover:text-white bg-[#111A28] border border-white/10"
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-medium text-[#94A3B8] hover:text-white bg-[#111A28] border border-white/10"
                   >
                     Send Another Message
                   </button>
                 </div>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
+                    <label className="block text-[11px] sm:text-xs font-semibold text-white uppercase tracking-wider mb-1">
                       Your Name <span className="text-[#3B82F6]">*</span>
                     </label>
                     <input
@@ -296,13 +295,13 @@ export const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Maria Santos"
-                      className="w-full px-4 py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-xs sm:text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
+                      className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
                       data-interactive="true"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
+                    <label className="block text-[11px] sm:text-xs font-semibold text-white uppercase tracking-wider mb-1">
                       Your Email <span className="text-[#3B82F6]">*</span>
                     </label>
                     <input
@@ -311,14 +310,14 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="maria@example.com"
-                      className="w-full px-4 py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-xs sm:text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
+                      className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
                       data-interactive="true"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] sm:text-xs font-semibold text-white uppercase tracking-wider mb-1">
                     Subject
                   </label>
                   <input
@@ -326,13 +325,13 @@ export const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="e.g. IT Specialist Role / Project Consultation"
-                    className="w-full px-4 py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-xs sm:text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
+                    className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-sm focus:border-[#3B82F6] focus:outline-none transition-colors"
                     data-interactive="true"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
+                  <label className="block text-[11px] sm:text-xs font-semibold text-white uppercase tracking-wider mb-1">
                     Message <span className="text-[#3B82F6]">*</span>
                   </label>
                   <textarea
@@ -341,14 +340,14 @@ export const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Hello John, I came across your portfolio and wanted to discuss..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-xs sm:text-sm focus:border-[#3B82F6] focus:outline-none transition-colors resize-none"
+                    className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-[#0D1420] border border-white/10 text-white placeholder-[#64748B] text-sm focus:border-[#3B82F6] focus:outline-none transition-colors resize-none"
                     data-interactive="true"
                   />
                 </div>
 
                 <div className="pt-2">
                   <MagneticButton
-                    className="w-full py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/30 shadow-[0_4px_16px_rgba(37,99,235,0.25)] transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/30 shadow-[0_4px_16px_rgba(37,99,235,0.25)] transition-all flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
                     <span>{isSubmitting ? 'Sending Message...' : 'Send Message'}</span>
