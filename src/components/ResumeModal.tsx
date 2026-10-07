@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Printer, Download, Mail, Phone, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
+import { X, Printer, Download, Mail, MapPin, ShieldCheck } from 'lucide-react';
 import { educationData } from '../data/education';
 
 interface ResumeModalProps {
@@ -80,29 +80,14 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               Networking Specialist & Full-Stack Software Developer | BSIT
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#94A3B8]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#94A3B8]">
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <span>+63 930 899 3055</span>
+                <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" />
+                <span>Maramag, Bukidnon, Philippines</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <span>johnangelocabatingan65@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <span>Paglaum Village, San Miguel, Maramag, Bukidnon</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ExternalLink className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <a
-                  href="https://www.facebook.com/john.cabatingan.04"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  facebook.com/john.cabatingan.04
-                </a>
+                <span>Available via Portfolio Contact Form</span>
               </div>
             </div>
           </div>

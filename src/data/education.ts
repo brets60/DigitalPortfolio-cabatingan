@@ -21,15 +21,15 @@ export const educationData: EducationItem = {
       name: "David Mark Ybañez",
       title: "IT Instructor",
       institution: "Torres Capitol College",
-      location: "Purok 2b Sayre Highway, Panadtalan, Bukidnon",
-      contact: "09264662436"
+      location: "Panadtalan, Maramag, Bukidnon",
+      contact: "Available upon formal request"
     },
     {
       name: "Jessie Mae C. Jusayan",
       title: "IT Instructor",
       institution: "Torres Capitol College",
-      location: "Purok 2b Sayre Highway, Panadtalan, Bukidnon",
-      contact: "Jessiemae123@gmail.com"
+      location: "Panadtalan, Maramag, Bukidnon",
+      contact: "Available upon formal request"
     }
   ]
 };

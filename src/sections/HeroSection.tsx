@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, ShieldCheck, Wifi, MapPin } from 'lucide-react';
-import { GithubIcon } from '../components/Icons';
 import { MagneticButton } from '../components/MagneticButton';
 
 interface HeroSectionProps {
@@ -133,11 +132,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
             {/* Action Buttons: Full width stack on mobile, horizontal on tablet/desktop */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
               <MagneticButton
-                href="#github"
+                href="#journey"
                 className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/40 shadow-[0_4px_20px_rgba(37,99,235,0.3)] transition-all duration-200 group flex items-center justify-center"
               >
-                <GithubIcon className="w-4 h-4 mr-2 text-white" />
-                <span>Explore GitHub Repos</span>
+                <span>Explore Journey & Work</span>
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
               </MagneticButton>
 
