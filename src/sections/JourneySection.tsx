@@ -1,6 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { timelineItems } from '../data/timeline';
-import { Milestone, Calendar, CheckCircle2 } from 'lucide-react';
+import { Milestone, CheckCircle2 } from 'lucide-react';
 
 export const JourneySection: React.FC = () => {
   return (
@@ -8,7 +9,13 @@ export const JourneySection: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <Milestone className="w-3.5 h-3.5" />
             <span>Path & Milestones</span>
@@ -19,12 +26,19 @@ export const JourneySection: React.FC = () => {
           <p className="text-base text-[#94A3B8]">
             A chronicle of practical systems development, field infrastructure implementations, and collegiate academic progression.
           </p>
-        </div>
+        </motion.div>
 
         {/* Clean Vertical Timeline */}
         <div className="relative pl-6 sm:pl-10 border-l border-white/10 space-y-12">
           {timelineItems.map((item, idx) => (
-            <div key={idx} className="relative group">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="relative group"
+            >
               
               {/* Timeline Indicator Dot */}
               <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-[#111A28] border-2 border-[#3B82F6] group-hover:scale-125 group-hover:border-white transition-all duration-200">
@@ -32,7 +46,10 @@ export const JourneySection: React.FC = () => {
               </div>
 
               {/* Card Container */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#0D1420] border border-white/[0.06] hover:border-white/15 transition-all duration-200">
+              <motion.div
+                whileHover={{ y: -3, transition: { duration: 0.15 } }}
+                className="p-6 sm:p-7 rounded-2xl bg-[#0D1420] border border-white/[0.06] hover:border-white/15 transition-all duration-200"
+              >
                 
                 {/* Header Row: Year & Tag */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -82,8 +99,8 @@ export const JourneySection: React.FC = () => {
                     ))}
                   </div>
                 )}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
 

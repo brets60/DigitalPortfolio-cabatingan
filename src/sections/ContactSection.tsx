@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Copy, Check, MessageSquare } from 'lucide-react';
 import { GithubIcon, FacebookIcon, LinkedinIcon } from '../components/Icons';
 import { MagneticButton } from '../components/MagneticButton';
@@ -34,6 +36,18 @@ export const ContactSection: React.FC = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
+
+      // Trigger subtle celebratory confetti burst
+      try {
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ['#3B82F6', '#60A5FA', '#93C5FD', '#10B981'],
+        });
+      } catch (err) {
+        // Fallback gracefully
+      }
     }, 600);
   };
 
@@ -50,7 +64,13 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-14"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Initiate Communication</span>
@@ -61,12 +81,18 @@ export const ContactSection: React.FC = () => {
           <p className="text-lg text-[#94A3B8]">
             Let's turn it into something useful.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Left Column: Direct Contact Details & Quick Links (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 space-y-6"
+          >
             <div className="p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
               <h3 className="text-base font-bold text-white mb-4">
                 Direct Contact Information
@@ -89,14 +115,15 @@ export const ContactSection: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                  <button
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => handleCopy(contactEmail, 'email')}
                     className="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/10 text-[#94A3B8] hover:text-white transition-colors shrink-0 ml-2"
                     title="Copy email address"
                     data-interactive="true"
                   >
                     {copiedField === 'email' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
+                  </motion.button>
                 </div>
 
                 {/* Phone Item */}
@@ -115,14 +142,15 @@ export const ContactSection: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                  <button
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => handleCopy(contactPhone, 'phone')}
                     className="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/10 text-[#94A3B8] hover:text-white transition-colors shrink-0 ml-2"
                     title="Copy phone number"
                     data-interactive="true"
                   >
                     {copiedField === 'phone' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
+                  </motion.button>
                 </div>
 
                 {/* Location Item */}
@@ -141,20 +169,24 @@ export const ContactSection: React.FC = () => {
 
               {/* Direct Buttons */}
               <div className="mt-6 pt-5 border-t border-white/[0.06] flex flex-wrap gap-2.5">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
                   href={`mailto:${contactEmail}`}
                   className="flex-1 py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] transition-colors"
                   data-interactive="true"
                 >
                   Email Me
-                </a>
-                <a
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
                   href="#contact-form"
                   className="flex-1 py-2.5 rounded-xl text-center text-xs font-semibold text-white bg-[#0D1420] hover:bg-[#162235] border border-white/10 transition-colors"
                   data-interactive="true"
                 >
                   Let's Work Together
-                </a>
+                </motion.a>
               </div>
             </div>
 
@@ -164,17 +196,21 @@ export const ContactSection: React.FC = () => {
                 Social Profiles & Networks
               </h4>
               <div className="flex flex-wrap gap-2">
-                <a
-                  href="https://github.com/johncabatingan"
+                <motion.a
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                  href="https://github.com/brets60"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0D1420] hover:bg-[#162235] text-xs font-medium text-white border border-white/[0.06] transition-colors"
                   data-interactive="true"
                 >
                   <GithubIcon className="w-4 h-4" />
-                  <span>GitHub</span>
-                </a>
-                <a
+                  <span>GitHub @brets60</span>
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   href="https://www.facebook.com/john.cabatingan.04"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -182,9 +218,11 @@ export const ContactSection: React.FC = () => {
                   data-interactive="true"
                 >
                   <FacebookIcon className="w-4 h-4 text-blue-400" />
-                  <span>Facebook Profile</span>
-                </a>
-                <a
+                  <span>Facebook</span>
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   href="https://linkedin.com/in/john-angelo-cabatingan"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -193,13 +231,17 @@ export const ContactSection: React.FC = () => {
                 >
                   <LinkedinIcon className="w-4 h-4 text-sky-400" />
                   <span>LinkedIn</span>
-                </a>
+                </motion.a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Interactive Contact Form (7 cols) */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
             id="contact-form"
             className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#111A28] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
           >
@@ -211,7 +253,11 @@ export const ContactSection: React.FC = () => {
             </p>
 
             {isSubmitted ? (
-              <div className="p-8 rounded-xl bg-[#0D1420] border border-emerald-500/30 text-center space-y-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-8 rounded-xl bg-[#0D1420] border border-emerald-500/30 text-center space-y-4"
+              >
                 <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
@@ -236,11 +282,10 @@ export const ContactSection: React.FC = () => {
                     Send Another Message
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Name Input */}
                   <div>
                     <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
                       Your Name <span className="text-[#3B82F6]">*</span>
@@ -256,7 +301,6 @@ export const ContactSection: React.FC = () => {
                     />
                   </div>
 
-                  {/* Email Input */}
                   <div>
                     <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
                       Your Email <span className="text-[#3B82F6]">*</span>
@@ -273,7 +317,6 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Subject Input */}
                 <div>
                   <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
                     Subject
@@ -288,7 +331,6 @@ export const ContactSection: React.FC = () => {
                   />
                 </div>
 
-                {/* Message Input */}
                 <div>
                   <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
                     Message <span className="text-[#3B82F6]">*</span>
@@ -304,7 +346,6 @@ export const ContactSection: React.FC = () => {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <div className="pt-2">
                   <MagneticButton
                     className="w-full py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/30 shadow-[0_4px_16px_rgba(37,99,235,0.25)] transition-all flex items-center justify-center gap-2"
@@ -315,7 +356,7 @@ export const ContactSection: React.FC = () => {
                 </div>
               </form>
             )}
-          </div>
+          </motion.div>
 
         </div>
 

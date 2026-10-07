@@ -1,6 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { educationData, secondaryEducation } from '../data/education';
-import { GraduationCap, BookOpen, CheckCircle, Award, Users, School } from 'lucide-react';
+import { GraduationCap, BookOpen, Users } from 'lucide-react';
 
 export const EducationSection: React.FC = () => {
   return (
@@ -8,7 +9,13 @@ export const EducationSection: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-14"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <GraduationCap className="w-3.5 h-3.5" />
             <span>Academic Background</span>
@@ -19,12 +26,19 @@ export const EducationSection: React.FC = () => {
           <p className="text-base text-[#94A3B8]">
             Formal collegiate and secondary foundational training in Information Technology and computer systems.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Main Tertiary Degree Card (7 cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#0D1420] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7 }}
+            whileHover={{ y: -3, transition: { duration: 0.15 } }}
+            className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#0D1420] border border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+          >
             <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
               <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#3B82F6]/10 text-[#60A5FA] border border-[#3B82F6]/20">
                 Tertiary Education
@@ -63,13 +77,20 @@ export const EducationSection: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Secondary Education & Faculty References (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             
             {/* Secondary Education Card */}
-            <div className="p-6 rounded-2xl bg-[#0D1420] border border-white/[0.08]">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ y: -3, transition: { duration: 0.15 } }}
+              className="p-6 rounded-2xl bg-[#0D1420] border border-white/[0.08]"
+            >
               <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-white/[0.05] text-[#94A3B8]">
                   Secondary
@@ -83,10 +104,16 @@ export const EducationSection: React.FC = () => {
               </h4>
               <p className="text-xs text-[#94A3B8] mb-2">{secondaryEducation.location}</p>
               <p className="text-xs text-[#64748B]">{secondaryEducation.track}</p>
-            </div>
+            </motion.div>
 
             {/* Academic Faculty References */}
-            <div className="p-6 rounded-2xl bg-[#0D1420] border border-white/[0.08]">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="p-6 rounded-2xl bg-[#0D1420] border border-white/[0.08]"
+            >
               <div className="flex items-center gap-2 mb-4">
                 <Users className="w-4 h-4 text-[#3B82F6]" />
                 <h4 className="text-xs font-bold uppercase tracking-wider text-white">
@@ -96,8 +123,9 @@ export const EducationSection: React.FC = () => {
 
               <div className="space-y-4">
                 {educationData.references.map((ref, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
+                    whileHover={{ x: 3, transition: { duration: 0.15 } }}
                     className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05] text-xs"
                   >
                     <div className="flex justify-between items-start">
@@ -111,10 +139,10 @@ export const EducationSection: React.FC = () => {
                         {ref.contact}
                       </p>
                     )}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
           </div>
 

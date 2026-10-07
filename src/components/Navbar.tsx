@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
@@ -30,7 +31,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         setIsScrolled(false);
       }
 
-      // Update active section
       const sections = ['hero', 'about', 'skills', 'github', 'experience', 'process', 'education', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -58,10 +58,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'py-3.5 bg-[#080D16]/90 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.5)]'
+          ? 'py-3 bg-[#080D16]/90 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.5)]'
           : 'py-5 bg-transparent border-b border-transparent'
       }`}
     >
@@ -73,9 +76,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
           className="group flex items-center gap-2.5 text-white font-bold text-xl tracking-tight"
           data-interactive="true"
         >
-          <div className="w-9 h-9 rounded-lg bg-[#111A28] border border-white/10 flex items-center justify-center font-mono text-sm font-semibold tracking-normal text-[#F8FAFC] group-hover:border-[#3B82F6] group-hover:text-[#60A5FA] transition-colors">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-9 h-9 rounded-lg bg-[#111A28] border border-white/10 flex items-center justify-center font-mono text-sm font-semibold tracking-normal text-[#F8FAFC] group-hover:border-[#3B82F6] group-hover:text-[#60A5FA] transition-colors"
+          >
             JAC
-          </div>
+          </motion.div>
           <span className="font-semibold text-base sm:text-lg tracking-tight">
             John Cabatingan<span className="text-[#3B82F6]">.</span>
           </span>
@@ -90,13 +97,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`px-3 py-1 text-xs xl:text-sm font-medium rounded-full transition-all duration-150 ${
+                className={`relative px-3 py-1 text-xs xl:text-sm font-medium rounded-full transition-colors duration-150 ${
                   isActive
-                    ? 'text-white bg-white/10 shadow-sm'
-                    : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-white/[0.04]'
+                    ? 'text-white'
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
                 }`}
                 data-interactive="true"
               >
+                {isActive && (
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    className="absolute inset-0 bg-white/10 rounded-full shadow-sm -z-10"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
                 {link.name}
               </a>
             );
@@ -105,7 +119,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
 
         {/* Right CTA Actions */}
         <div className="hidden sm:flex items-center gap-3">
-          <a
+          <motion.a
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
             href="https://github.com/brets60"
             target="_blank"
             rel="noopener noreferrer"
@@ -114,27 +130,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             data-interactive="true"
           >
             <GithubIcon className="w-4 h-4" />
-          </a>
+          </motion.a>
 
           {onOpenResume && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
               onClick={onOpenResume}
               className="text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] px-3 py-2 rounded-lg transition-colors border border-transparent hover:border-white/10"
               data-interactive="true"
             >
               Resume
-            </button>
+            </motion.button>
           )}
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
             href="#contact"
             onClick={(e) => handleLinkClick(e, '#contact')}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/30 shadow-[0_2px_12px_rgba(37,99,235,0.25)] transition-all transform active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB] border border-[#3B82F6]/30 shadow-[0_2px_12px_rgba(37,99,235,0.25)] transition-all"
             data-interactive="true"
           >
             <span>Let's Talk</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+          </motion.a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -160,52 +180,60 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
       </div>
 
       {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[61px] bg-[#080D16]/98 border-b border-white/10 backdrop-blur-xl px-5 py-6 shadow-2xl transition-all">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-3 rounded-lg text-sm font-medium text-[#94A3B8] hover:text-white hover:bg-[#111A28] transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-
-            <div className="pt-3 border-t border-white/10 flex flex-col gap-2 mt-2">
-              <a
-                href="https://github.com/brets60"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-center py-2.5 rounded-lg text-sm font-medium text-white bg-[#111A28] border border-white/10 flex items-center justify-center gap-2"
-              >
-                <GithubIcon className="w-4 h-4" />
-                <span>GitHub @brets60</span>
-              </a>
-              {onOpenResume && (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenResume();
-                  }}
-                  className="w-full text-center py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] bg-[#111A28] border border-white/10"
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="lg:hidden fixed inset-x-0 top-[57px] bg-[#080D16]/98 border-b border-white/10 backdrop-blur-xl px-5 py-6 shadow-2xl overflow-hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className="px-4 py-3 rounded-lg text-sm font-medium text-[#94A3B8] hover:text-white hover:bg-[#111A28] transition-colors"
                 >
-                  View Official Resume
-                </button>
-              )}
-              <a
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, '#contact')}
-                className="w-full text-center py-2.5 rounded-lg text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB]"
-              >
-                Let's Talk
-              </a>
+                  {link.name}
+                </a>
+              ))}
+
+              <div className="pt-3 border-t border-white/10 flex flex-col gap-2 mt-2">
+                <a
+                  href="https://github.com/brets60"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-center py-2.5 rounded-lg text-sm font-medium text-white bg-[#111A28] border border-white/10 flex items-center justify-center gap-2"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>GitHub @brets60</span>
+                </a>
+                {onOpenResume && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenResume();
+                    }}
+                    className="w-full text-center py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] bg-[#111A28] border border-white/10"
+                  >
+                    View Official Resume
+                  </button>
+                )}
+                <a
+                  href="#contact"
+                  onClick={(e) => handleLinkClick(e, '#contact')}
+                  className="w-full text-center py-2.5 rounded-lg text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#2563EB]"
+                >
+                  Let's Talk
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };

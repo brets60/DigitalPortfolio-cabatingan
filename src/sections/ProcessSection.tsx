@@ -1,5 +1,6 @@
 import React from 'react';
-import { Compass, Lightbulb, PenTool, Code2, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Compass, Lightbulb, PenTool, Code2, Sparkles } from 'lucide-react';
 
 export const ProcessSection: React.FC = () => {
   const steps = [
@@ -33,12 +34,37 @@ export const ProcessSection: React.FC = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 22 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
     <section id="process" className="py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>Methodology</span>
@@ -49,14 +75,26 @@ export const ProcessSection: React.FC = () => {
           <p className="text-base text-[#94A3B8]">
             A disciplined, iterative engineering process applied to every software application and network infrastructure project.
           </p>
-        </div>
+        </motion.div>
 
         {/* 4 Steps: Horizontal Layout on Desktop, Vertical on Mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
+        >
           {steps.map((step, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="group relative p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.06] hover:border-[#3B82F6]/40 transition-all duration-200 flex flex-col justify-between"
+              variants={itemVariants}
+              whileHover={{
+                y: -6,
+                borderColor: 'rgba(59, 130, 246, 0.4)',
+                transition: { duration: 0.2 },
+              }}
+              className="group relative p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.06] transition-all flex flex-col justify-between"
               data-interactive="true"
             >
               <div>
@@ -89,9 +127,9 @@ export const ProcessSection: React.FC = () => {
                 <span>Phase {step.number}</span>
                 <span className="font-mono text-[#3B82F6]">verified ›</span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

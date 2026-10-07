@@ -1,6 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { githubRepos, githubProfile } from '../data/githubRepos';
-import { ExternalLink, GitFork, Star, ArrowUpRight, Code2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from '../components/Icons';
 
 export const GitHubSection: React.FC = () => {
@@ -11,12 +12,37 @@ export const GitHubSection: React.FC = () => {
     return 'bg-purple-400';
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
     <section id="github" className="py-20 md:py-28 bg-[#0D1420] relative border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6"
+        >
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
               <GithubIcon className="w-3.5 h-3.5" />
@@ -31,7 +57,9 @@ export const GitHubSection: React.FC = () => {
           </div>
 
           {/* Direct Profile CTA Button */}
-          <a
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
             href={githubProfile.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -41,18 +69,30 @@ export const GitHubSection: React.FC = () => {
             <GithubIcon className="w-4 h-4 text-white" />
             <span>Visit @brets60 on GitHub</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-[#60A5FA]" />
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
-        {/* Repositories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Repositories Grid with Staggered Reveal */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {githubRepos.map((repo, idx) => (
-            <a
+            <motion.a
               key={idx}
+              variants={cardVariants}
+              whileHover={{
+                y: -6,
+                borderColor: 'rgba(59, 130, 246, 0.4)',
+                transition: { duration: 0.2 },
+              }}
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative p-6 rounded-2xl bg-[#111A28] border border-white/[0.07] hover:border-[#3B82F6]/40 transition-all duration-200 hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col justify-between"
+              className="group relative p-6 rounded-2xl bg-[#111A28] border border-white/[0.07] transition-all shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col justify-between"
               data-interactive="true"
             >
               <div>
@@ -88,12 +128,18 @@ export const GitHubSection: React.FC = () => {
                   View Repo ›
                 </span>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
 
         {/* Profile Banner Strip */}
-        <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-5">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-12 p-6 sm:p-7 rounded-2xl bg-[#111A28] border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-5"
+        >
           <div className="flex items-center gap-4 text-center sm:text-left">
             <div className="w-12 h-12 rounded-xl bg-[#0D1420] border border-white/10 flex items-center justify-center text-white shrink-0">
               <GithubIcon className="w-6 h-6" />
@@ -108,7 +154,9 @@ export const GitHubSection: React.FC = () => {
             </div>
           </div>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             href={githubProfile.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -116,8 +164,8 @@ export const GitHubSection: React.FC = () => {
             data-interactive="true"
           >
             Browse All Repositories
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
       </div>
     </section>

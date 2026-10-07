@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { skillCategories } from '../data/skills';
 import {
   Wifi,
@@ -31,7 +32,6 @@ import { GithubIcon } from '../components/Icons';
 export const SkillsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  // Icon mapping resolver
   const renderIcon = (iconName: string) => {
     const props = { className: "w-4 h-4 transition-transform duration-200 group-hover:scale-110" };
     switch (iconName) {
@@ -75,7 +75,13 @@ export const SkillsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+        >
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#111A28] border border-white/[0.08] text-[#60A5FA] mb-3">
               <Cpu className="w-3.5 h-3.5" />
@@ -92,10 +98,11 @@ export const SkillsSection: React.FC = () => {
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2">
             {categoriesList.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 ${
+                className={`relative px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 ${
                   selectedCategory === cat
                     ? 'bg-[#1D4ED8] text-white shadow-sm border border-[#3B82F6]/30'
                     : 'bg-[#111A28] text-[#94A3B8] hover:text-white border border-white/[0.06] hover:bg-[#162235]'
@@ -103,62 +110,74 @@ export const SkillsSection: React.FC = () => {
                 data-interactive="true"
               >
                 {cat}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Categories Stack Grid */}
+        {/* Categories Stack Grid with Animated Layout */}
         <div className="space-y-10">
-          {filteredCategories.map((cat) => (
-            <div
-              key={cat.title}
-              className="p-6 sm:p-7 rounded-2xl bg-[#0D1420] border border-white/[0.07] relative"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-5 gap-2 border-b border-white/[0.05] pb-4">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
-                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                    {cat.title}
-                  </h3>
-                </div>
-                <p className="text-xs text-[#94A3B8]">
-                  {cat.description}
-                </p>
-              </div>
-
-              {/* Individual Skill Cards */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
-                {cat.skills.map((skill, sIdx) => (
-                  <div
-                    key={sIdx}
-                    className="group relative p-3.5 sm:p-4 rounded-xl bg-[#111A28] border border-white/[0.06] hover:border-[#3B82F6]/40 transition-all duration-150 hover:-translate-y-1 shadow-sm hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex flex-col justify-between"
-                    data-interactive="true"
-                  >
-                    <div className="flex items-start justify-between mb-2.5">
-                      <div className="p-2 rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover:bg-[#3B82F6]/10 transition-colors">
-                        {renderIcon(skill.iconName)}
-                      </div>
-                      {skill.highlight && (
-                        <span className="text-[10px] font-semibold text-[#60A5FA] bg-[#3B82F6]/10 border border-[#3B82F6]/20 px-1.5 py-0.5 rounded">
-                          Core
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight group-hover:text-[#60A5FA] transition-colors leading-snug">
-                        {skill.name}
-                      </h4>
-                      <p className="text-[11px] text-[#64748B] mt-1 font-mono">
-                        {skill.level}
-                      </p>
-                    </div>
+          <AnimatePresence mode="wait">
+            {filteredCategories.map((cat) => (
+              <motion.div
+                key={cat.title}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="p-6 sm:p-7 rounded-2xl bg-[#0D1420] border border-white/[0.07] relative"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-5 gap-2 border-b border-white/[0.05] pb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
+                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                      {cat.title}
+                    </h3>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                  <p className="text-xs text-[#94A3B8]">
+                    {cat.description}
+                  </p>
+                </div>
+
+                {/* Individual Skill Cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
+                  {cat.skills.map((skill, sIdx) => (
+                    <motion.div
+                      key={sIdx}
+                      whileHover={{
+                        y: -4,
+                        borderColor: 'rgba(59, 130, 246, 0.4)',
+                        transition: { duration: 0.15 },
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      className="group relative p-3.5 sm:p-4 rounded-xl bg-[#111A28] border border-white/[0.06] transition-colors shadow-sm flex flex-col justify-between"
+                      data-interactive="true"
+                    >
+                      <div className="flex items-start justify-between mb-2.5">
+                        <div className="p-2 rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover:bg-[#3B82F6]/10 transition-colors">
+                          {renderIcon(skill.iconName)}
+                        </div>
+                        {skill.highlight && (
+                          <span className="text-[10px] font-semibold text-[#60A5FA] bg-[#3B82F6]/10 border border-[#3B82F6]/20 px-1.5 py-0.5 rounded">
+                            Core
+                          </span>
+                        )}
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight group-hover:text-[#60A5FA] transition-colors leading-snug">
+                          {skill.name}
+                        </h4>
+                        <p className="text-[11px] text-[#64748B] mt-1 font-mono">
+                          {skill.level}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
       </div>
