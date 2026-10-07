@@ -11,24 +11,24 @@ export interface GitHubRepo {
 export const githubProfile = {
   username: "brets60",
   profileUrl: "https://github.com/brets60",
-  publicRepos: 8,
+  publicRepos: 10,
   bio: "Full-Stack Software Developer & Networking Specialist building practical digital systems and hardware integrations.",
 };
 
 export const githubRepos: GitHubRepo[] = [
+  {
+    name: "DigitalPortfolio-cabatingan",
+    description: "Modern, human-designed personal digital portfolio website for John Angelo P. Cabatingan — Networking Specialist & Full-Stack Developer.",
+    language: "TypeScript / React",
+    html_url: "https://github.com/brets60/DigitalPortfolio-cabatingan",
+    tag: "Active Project"
+  },
   {
     name: "Laundry-Pickup-and-Delivery-Management-System",
     description: "A comprehensive web-based management platform designed to organize customers, laundry orders, pickup schedules, deliveries, and billing.",
     language: "HTML / Python",
     html_url: "https://github.com/brets60/Laundry-Pickup-and-Delivery-Management-System",
     tag: "Featured System"
-  },
-  {
-    name: "digital-portfolio-cabatingan",
-    description: "Modern, human-designed personal digital portfolio website for John Angelo P. Cabatingan — Networking Specialist & Full-Stack Developer.",
-    language: "TypeScript / React",
-    html_url: "https://github.com/brets60/digital-portfolio-cabatingan",
-    tag: "Active Project"
   },
   {
     name: "smartaid",
