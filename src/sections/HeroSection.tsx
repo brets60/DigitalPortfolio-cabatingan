@@ -195,48 +195,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                   </div>
                 </div>
               </div>
-
-              {/* Floating Card: "GitHub Connected" (Bottom-Left Float with Smooth Framer Motion Float) */}
-              <motion.a
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.03 }}
-                href="https://github.com/brets60"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute -bottom-6 -left-4 sm:-left-6 p-4 rounded-xl bg-[#0D1420]/95 backdrop-blur-md border border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.7)] max-w-[240px] hover:border-[#3B82F6]/50 transition-colors"
-                data-interactive="true"
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <GithubIcon className="w-3.5 h-3.5 text-[#3B82F6]" />
-                  <span className="text-[11px] font-semibold text-[#94A3B8] uppercase tracking-wider">
-                    GitHub Connected
-                  </span>
-                </div>
-                <p className="text-xs font-semibold text-white leading-snug">
-                  @brets60 Repositories
-                </p>
-                <div className="mt-2 pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] text-[#64748B]">
-                  <span>Public Code & Apps</span>
-                  <span className="text-[#60A5FA] font-mono">View ›</span>
-                </div>
-              </motion.a>
-
-              {/* Top-Right Floating Metric Badge */}
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="hidden sm:flex absolute -top-4 -right-4 p-3 rounded-xl bg-[#0D1420]/95 backdrop-blur-md border border-white/10 shadow-lg items-center gap-2.5"
-              >
-                <div className="w-7 h-7 rounded-lg bg-[#3B82F6]/10 border border-[#3B82F6]/20 flex items-center justify-center text-[#60A5FA]">
-                  <Wifi className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-semibold text-[#94A3B8] tracking-wider">Network Status</p>
-                  <p className="text-xs font-bold text-white font-mono">Gigabit • 0% Loss</p>
-                </div>
-              </motion.div>
-
             </motion.div>
           </div>
 
