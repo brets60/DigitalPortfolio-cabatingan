@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
+import { FacebookIcon } from '../components/Icons';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -21,13 +22,24 @@ export const Footer: React.FC = () => {
                 John Angelo P. Cabatingan
               </p>
               <p className="text-[11px] text-[#64748B]">
-                Networking Specialist & Full-Stack Software Developer
+                IT Support Staff • Network Technician • Systems Administrator
               </p>
             </div>
           </div>
 
-          {/* Back to top button */}
+          {/* Social & Back to top button */}
           <div className="flex items-center gap-3">
+            <a
+              href="https://www.facebook.com/john.cabatingan.04"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-lg bg-[#111A28] hover:bg-[#162235] text-[#94A3B8] hover:text-white border border-white/[0.06] transition-colors"
+              aria-label="Facebook Profile"
+              data-interactive="true"
+            >
+              <FacebookIcon className="w-4 h-4 text-blue-400" />
+            </a>
+
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111A28] hover:bg-[#162235] text-white border border-white/10 transition-colors text-xs font-medium"
@@ -42,7 +54,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Credits */}
         <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left text-[11px] text-[#64748B]">
           <p>
-            Designed & developed by <span className="text-white font-medium">John Angelo P. Cabatingan</span>
+            Designed & developed for <span className="text-white font-medium">John Angelo P. Cabatingan</span>
           </p>
           <p>
             © {new Date().getFullYear()} John Angelo P. Cabatingan. All rights reserved.

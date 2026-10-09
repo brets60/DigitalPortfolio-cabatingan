@@ -144,7 +144,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                 className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-[#F8FAFC] bg-[#111A28] hover:bg-[#162235] border border-white/10 hover:border-white/20 shadow-sm transition-all duration-200 group flex items-center justify-center"
               >
                 <Download className="w-4 h-4 mr-2 text-[#60A5FA] transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span>Download Resume</span>
+                <span>View Resume & Application</span>
               </MagneticButton>
             </motion.div>
           </motion.div>

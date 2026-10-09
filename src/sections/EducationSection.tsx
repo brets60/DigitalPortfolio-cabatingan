@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { educationData, secondaryEducation } from '../data/education';
+import { educationData, secondaryEducation, elementaryEducation } from '../data/education';
 import { GraduationCap, BookOpen, Users } from 'lucide-react';
 
 export const EducationSection: React.FC = () => {
@@ -104,6 +104,29 @@ export const EducationSection: React.FC = () => {
               </h4>
               <p className="text-xs text-[#94A3B8] mb-1.5">{secondaryEducation.location}</p>
               <p className="text-xs text-[#64748B]">{secondaryEducation.track}</p>
+            </motion.div>
+
+            {/* Elementary Education Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              whileHover={{ y: -3, transition: { duration: 0.15 } }}
+              className="p-5 sm:p-6 rounded-2xl bg-[#0D1420] border border-white/[0.08]"
+            >
+              <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-white/[0.05] text-[#94A3B8]">
+                  Elementary
+                </span>
+                <span className="text-xs font-mono text-[#94A3B8]">
+                  {elementaryEducation.year}
+                </span>
+              </div>
+              <h4 className="text-sm sm:text-base font-bold text-white mb-1">
+                {elementaryEducation.school}
+              </h4>
+              <p className="text-xs text-[#94A3B8]">{elementaryEducation.location}</p>
             </motion.div>
 
             {/* Academic Faculty References */}

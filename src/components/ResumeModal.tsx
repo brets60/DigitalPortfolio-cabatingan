@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { X, Printer, Download, Mail, MapPin, ShieldCheck } from 'lucide-react';
-import { educationData } from '../data/education';
+import React, { useState, useEffect } from 'react';
+import { X, Printer, Mail, Phone, MapPin, ExternalLink, FileText, UserCheck } from 'lucide-react';
+import { educationData, secondaryEducation, elementaryEducation, applicationLetterData } from '../data/education';
+import { FacebookIcon } from './Icons';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -8,6 +9,8 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  const [activeTab, setActiveTab] = useState<'resume' | 'letter'>('resume');
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -32,23 +35,45 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   return (
     <div
-      className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0D1420] border border-white/10 rounded-2xl shadow-2xl text-[#F8FAFC] p-6 sm:p-10 my-6 print:p-0 print:m-0 print:bg-white print:text-black"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0D1420] border border-white/10 rounded-2xl shadow-2xl text-[#F8FAFC] p-6 sm:p-10 my-6 print:p-0 print:m-0 print:bg-white print:text-black print:max-w-none print:shadow-none print:border-none"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Controls Bar (hidden during print) */}
-        <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08] print:hidden">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-            <span className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-              Verified Curriculum Vitae
-            </span>
+        {/* Controls Bar & Tab Switcher (hidden during print) */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-white/[0.08] gap-4 print:hidden">
+          {/* Tabs */}
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#111A28] border border-white/[0.08] self-start sm:self-auto">
+            <button
+              onClick={() => setActiveTab('resume')}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'resume'
+                  ? 'bg-[#1D4ED8] text-white shadow-sm'
+                  : 'text-[#94A3B8] hover:text-white'
+              }`}
+              data-interactive="true"
+            >
+              <UserCheck className="w-3.5 h-3.5" />
+              <span>Curriculum Vitae</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('letter')}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'letter'
+                  ? 'bg-[#1D4ED8] text-white shadow-sm'
+                  : 'text-[#94A3B8] hover:text-white'
+              }`}
+              data-interactive="true"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Application Letter</span>
+            </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 self-end sm:self-auto">
             <button
               onClick={handlePrint}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-[#111A28] hover:bg-[#162235] text-white border border-white/10 transition-colors"
@@ -69,149 +94,280 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           </div>
         </div>
 
-        {/* Resume Content Body */}
-        <div className="space-y-6 text-sm leading-relaxed">
-          {/* Header */}
-          <div className="border-b border-white/[0.08] pb-6">
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
-              John Angelo P. Cabatingan
-            </h1>
-            <p className="text-sm font-semibold text-[#60A5FA] mb-3">
-              Networking Specialist & Full-Stack Software Developer | BSIT
-            </p>
+        {/* ================= TAB 1: CURRICULUM VITAE / RESUME ================= */}
+        {activeTab === 'resume' && (
+          <div className="space-y-6 text-sm leading-relaxed">
+            {/* Header: Photo + Contact Info */}
+            <div className="border-b border-white/[0.08] pb-6 flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-5">
+              <div className="flex-1">
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
+                  John Angelo P. Cabatingan
+                </h1>
+                <p className="text-xs sm:text-sm font-semibold text-[#60A5FA] mb-3">
+                  IT Support Staff • Network Technician • Systems Administrator | BSIT
+                </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#94A3B8]">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <span>Maramag, Bukidnon, Philippines</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#94A3B8]">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-[#3B82F6] shrink-0" />
+                    <a href="tel:+639308993055" className="hover:text-white transition-colors font-mono">
+                      0930 899 3055
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5 text-[#3B82F6] shrink-0" />
+                    <a href="mailto:johnangelocabatingan65@gmail.com" className="hover:text-white transition-colors font-mono truncate">
+                      johnangelocabatingan65@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2 sm:col-span-2">
+                    <MapPin className="w-3.5 h-3.5 text-[#3B82F6] shrink-0" />
+                    <span>Paglaum Village, San Miguel, Maramag, Bukidnon</span>
+                  </div>
+                  <div className="flex items-center gap-2 sm:col-span-2">
+                    <FacebookIcon className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                    <a
+                      href="https://www.facebook.com/john.cabatingan.04"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-blue-400 transition-colors flex items-center gap-1 text-xs"
+                    >
+                      <span>facebook.com/john.cabatingan.04</span>
+                      <ExternalLink className="w-3 h-3 text-[#60A5FA]" />
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#3B82F6]" />
-                <span>Available via Portfolio Contact Form</span>
+
+              {/* 2x2 Formal ID Portrait */}
+              <div className="w-24 h-28 sm:w-28 sm:h-32 rounded-xl overflow-hidden bg-[#111A28] border-2 border-white/10 shrink-0 shadow-md">
+                <img
+                  src="/docx_profile.jpg"
+                  alt="John Angelo P. Cabatingan formal portrait"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
             </div>
-          </div>
 
-          {/* Career Objective */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
-              Career Objective
-            </h2>
-            <p className="text-xs sm:text-sm text-[#CBD5E1]">
-              Dedicated Bachelor of Science in Information Technology student and aspiring Networking Specialist seeking an entry-level IT position where I can apply my comprehensive training in computer networking, systems administration, database management, hardware maintenance, web development, and cybersecurity fundamentals. Fully committed to proactive infrastructure maintenance, reliable technical support, and continuous professional growth.
-            </p>
-          </div>
+            {/* Career Objective */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
+                Objective
+              </h2>
+              <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
+                Dedicated Bachelor of Science in Information Technology graduate seeking an entry-level IT position where I can apply my comprehensive training in programming, database management, networking, web development, systems administration, and cybersecurity. Eager to contribute to organizational efficiency, support digital transformation, and deliver reliable technical solutions while continuing to grow professionally.
+              </p>
+            </div>
 
-          {/* Practical Professional & Field Experience */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
-              Technical & Field Experience
-            </h2>
-            <div className="space-y-3">
-              <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
-                <div className="flex justify-between items-start mb-1">
+            {/* Professional Experience */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
+                Professional Experience
+              </h2>
+              <div className="p-4 rounded-xl bg-[#111A28] border border-white/[0.05]">
+                <div className="flex justify-between items-start mb-2">
                   <h3 className="font-semibold text-white text-xs sm:text-sm">
-                    Network Technician & IT Systems Field Support
+                    Network Technician & IT Field Support Specialist
                   </h3>
-                  <span className="text-xs text-[#94A3B8] font-mono">2025 – 2026</span>
+                  <span className="text-xs text-[#60A5FA] font-mono">Practical Experience</span>
                 </div>
-                <p className="text-xs text-[#94A3B8] mb-2">
-                  Local Deployments & Practical Infrastructure Support • Bukidnon, PH
-                </p>
-                <ul className="list-disc list-inside space-y-1 text-xs text-[#CBD5E1]">
-                  <li>Installed, configured, and optimized WiFi routers, access points, and network switches for homes and small business environments.</li>
-                  <li>Ran, routed, and terminated Cat5e/Cat6 ethernet cables, verified continuity with cable testers, and ensured clean, safe rack layout.</li>
-                  <li>Diagnosed broadband connectivity, signal strength, latency, and packet loss issues.</li>
-                  <li>Delivered hardware and software support: workstation setup, OS installations, driver configuration, and peripheral troubleshooting.</li>
-                  <li>Guided non-technical users on network passwords, device connectivity, and simple security best practices.</li>
+                <ul className="space-y-2 text-xs text-[#CBD5E1]">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Install, configure, and set up WiFi routers, access points, and network devices for homes and offices.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Run and arrange network cables, connect devices properly, and ensure clean, safe wiring layouts.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Test internet connectivity, check signal strength, and troubleshoot weak or no connection issues.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Assist with basic technical support: computer setup, software installation, printer configuration, and system checks.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Guide users on devices to WiFi, changing passwords, and simple network maintenance.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Organize work records, log installation details, and complete all assigned tasks on schedule.</span>
+                  </li>
                 </ul>
               </div>
-
-              <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
-                <div className="flex justify-between items-start mb-1">
-                  <h3 className="font-semibold text-white text-xs sm:text-sm">
-                    Hardware, Network & Software Integration Lead
-                  </h3>
-                  <span className="text-xs text-[#94A3B8] font-mono">2026</span>
-                </div>
-                <p className="text-xs text-[#94A3B8] mb-2">
-                  Speed Detection & Pedestrian Warning System Capstone
-                </p>
-                <ul className="list-disc list-inside space-y-1 text-xs text-[#CBD5E1]">
-                  <li>Engineered Arduino velocity calculations and integrated 433MHz RF wireless signals triggering pedestrian alarm pillars.</li>
-                  <li>Configured ESP32-CAM module to automatically capture overspeeding vehicle snapshots.</li>
-                  <li>Implemented Python desktop serial listener storing violation logs and vehicle timestamps into SQLite.</li>
-                </ul>
-              </div>
             </div>
-          </div>
 
-          {/* Technical Skills Breakdown */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
-              Core Technical Competencies
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-[#111A28] border border-white/[0.05]">
-                <h4 className="font-semibold text-white mb-1">Networking & Hardware</h4>
-                <p className="text-[#94A3B8]">
-                  WiFi Router/AP Setup, Cat6 Structured Cabling, Cisco Packet Tracer, Subnetting (VLSM), VLANs, Computer Hardware Diagnostics, Component Replacement, Active Directory Basics.
-                </p>
-              </div>
-              <div className="p-3 rounded-lg bg-[#111A28] border border-white/[0.05]">
-                <h4 className="font-semibold text-white mb-1">Software & Web Development</h4>
-                <p className="text-[#94A3B8]">
-                  Python, Flask, HTML5, CSS3, JavaScript (ES6+), React, Tailwind CSS, SQLite, MySQL, REST APIs, Git, VS Code.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Education */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
-              Education
-            </h2>
-            <div className="space-y-2 text-xs">
-              <div className="p-3 rounded-lg bg-[#111A28] border border-white/[0.05] flex justify-between">
-                <div>
-                  <h4 className="font-semibold text-white">
-                    Bachelor of Science in Information Technology (BSIT)
+            {/* Skills */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
+                Skills
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
+                  <h4 className="font-semibold text-white mb-1.5 text-xs text-[#60A5FA]">
+                    Hard Skills
                   </h4>
-                  <p className="text-[#94A3B8]">Torres Capitol College, Inc. — Maramag, Bukidnon</p>
+                  <ul className="space-y-1 text-[#CBD5E1]">
+                    <li>• Computer Troubleshooting & Diagnostics</li>
+                    <li>• WiFi Router & Access Point Configuration</li>
+                    <li>• Cat5e / Cat6 Structured Cabling & Termination</li>
+                    <li>• Workstation Setup & Peripheral Maintenance</li>
+                    <li>• Cisco Packet Tracer, Subnetting (VLSM) & VLANs</li>
+                    <li>• Database Management & Python Programming</li>
+                  </ul>
                 </div>
-                <span className="text-[#60A5FA] font-mono">2023 – 2027</span>
+                <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
+                  <h4 className="font-semibold text-white mb-1.5 text-xs text-[#10B981]">
+                    Soft Skills
+                  </h4>
+                  <ul className="space-y-1 text-[#CBD5E1]">
+                    <li>• WiFi Installation & User Guidance</li>
+                    <li>• Clear & Patient End-User Support</li>
+                    <li>• Attention to Detail & Safe Cable Management</li>
+                    <li>• Technical Problem-Solving Mindset</li>
+                    <li>• Work Documentation & Installation Logging</li>
+                    <li>• Punctual & Organized Task Execution</li>
+                  </ul>
+                </div>
               </div>
-              <div className="p-3 rounded-lg bg-[#111A28] border border-white/[0.05] flex justify-between">
-                <div>
-                  <h4 className="font-semibold text-white">Secondary Education</h4>
-                  <p className="text-[#94A3B8]">San Miguel National High School — Maramag, Bukidnon</p>
+            </div>
+
+            {/* Education */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
+                Education
+              </h2>
+              <div className="space-y-2.5 text-xs">
+                {/* Tertiary */}
+                <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <div>
+                    <span className="text-[10px] font-semibold text-[#60A5FA] uppercase tracking-wider block">Tertiary</span>
+                    <h4 className="font-semibold text-white">
+                      Torres Capitol College, Inc.
+                    </h4>
+                    <p className="text-[#94A3B8]">
+                      Bachelor of Science in Information Technology • Maramag, Bukidnon
+                    </p>
+                  </div>
+                  <span className="text-[#60A5FA] font-mono text-xs shrink-0">Year: 2027</span>
                 </div>
-                <span className="text-[#94A3B8] font-mono">Graduated 2023</span>
+
+                {/* Secondary */}
+                <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <div>
+                    <span className="text-[10px] font-semibold text-[#94A3B8] uppercase tracking-wider block">Secondary</span>
+                    <h4 className="font-semibold text-white">{secondaryEducation.school}</h4>
+                    <p className="text-[#94A3B8]">{secondaryEducation.location}</p>
+                  </div>
+                  <span className="text-[#94A3B8] font-mono text-xs shrink-0">Year Graduated: 2023</span>
+                </div>
+
+                {/* Elementary */}
+                <div className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <div>
+                    <span className="text-[10px] font-semibold text-[#94A3B8] uppercase tracking-wider block">Elementary</span>
+                    <h4 className="font-semibold text-white">{elementaryEducation.school}</h4>
+                    <p className="text-[#94A3B8]">{elementaryEducation.location}</p>
+                  </div>
+                  <span className="text-[#94A3B8] font-mono text-xs shrink-0">Year Graduated: 2017</span>
+                </div>
+              </div>
+            </div>
+
+            {/* References */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
+                References
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                {educationData.references.map((ref, idx) => (
+                  <div key={idx} className="p-3.5 rounded-xl bg-[#111A28] border border-white/[0.05]">
+                    <h4 className="font-bold text-white uppercase tracking-wide">{ref.name}</h4>
+                    <p className="text-[#60A5FA] font-medium">{ref.title}</p>
+                    <p className="text-[#94A3B8]">{ref.institution}</p>
+                    <p className="text-[#64748B] text-[11px]">{ref.location}</p>
+                    {ref.contact && (
+                      <p className="text-white/90 font-mono text-[11px] mt-2 pt-2 border-t border-white/[0.05]">
+                        Contact: {ref.contact}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        )}
 
-          {/* Academic References */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] mb-2">
-              Academic References
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              {educationData.references.map((ref, idx) => (
-                <div key={idx} className="p-3 rounded-lg bg-[#111A28] border border-white/[0.05]">
-                  <h4 className="font-semibold text-white">{ref.name}</h4>
-                  <p className="text-[#60A5FA]">{ref.title}</p>
-                  <p className="text-[#94A3B8]">{ref.institution}</p>
-                  <p className="text-[#64748B] text-[11px]">{ref.location}</p>
-                  {ref.contact && (
-                    <p className="text-white/80 font-mono text-[11px] mt-1">{ref.contact}</p>
-                  )}
-                </div>
+        {/* ================= TAB 2: OFFICIAL APPLICATION LETTER ================= */}
+        {activeTab === 'letter' && (
+          <div className="space-y-6 text-sm leading-relaxed p-4 sm:p-6 rounded-2xl bg-[#111A28]/50 border border-white/[0.06] font-sans">
+            {/* Letter Date */}
+            <div className="text-xs text-[#94A3B8] font-mono">
+              {applicationLetterData.date}
+            </div>
+
+            {/* Recipient Block */}
+            <div className="space-y-1 text-xs sm:text-sm">
+              <p className="font-bold text-white tracking-wide uppercase">
+                {applicationLetterData.recipientName}
+              </p>
+              <p className="text-[#60A5FA] font-semibold">
+                {applicationLetterData.recipientTitle}
+              </p>
+              <p className="text-[#CBD5E1]">
+                {applicationLetterData.institution}
+              </p>
+              <p className="text-[#94A3B8]">
+                {applicationLetterData.location}
+              </p>
+            </div>
+
+            {/* Salutation */}
+            <div className="pt-2 text-white font-semibold text-xs sm:text-sm">
+              Dear Sir/Madam,
+            </div>
+
+            {/* Letter Body Paragraphs */}
+            <div className="space-y-4 text-xs sm:text-sm text-[#CBD5E1] text-justify leading-relaxed">
+              {applicationLetterData.paragraphs.map((p, idx) => (
+                <p key={idx}>{p}</p>
               ))}
             </div>
+
+            {/* Sign-off Block */}
+            <div className="pt-6 space-y-1 text-xs sm:text-sm">
+              <p className="text-[#94A3B8]">Respectfully,</p>
+              <div className="pt-6">
+                <p className="font-bold text-white text-base">
+                  {applicationLetterData.applicantName}
+                </p>
+                <p className="text-[#60A5FA] text-xs">
+                  {applicationLetterData.applicantRole}
+                </p>
+              </div>
+
+              {/* Applicant Contact Strip */}
+              <div className="pt-4 mt-4 border-t border-white/[0.08] flex flex-wrap gap-4 text-xs text-[#94A3B8]">
+                <div className="flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[#3B82F6]" />
+                  <span className="font-mono">{applicationLetterData.phone}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#3B82F6]" />
+                  <span className="font-mono">{applicationLetterData.email}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" />
+                  <span>{applicationLetterData.address}</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
+
       </div>
     </div>
   );
