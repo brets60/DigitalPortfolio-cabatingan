@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Project } from '../types';
 import { projects } from '../data/projects';
-import { ArrowRight, Eye, Radio, Sparkles, Network, Calendar, Shirt } from 'lucide-react';
+import { ArrowRight, Eye, Radio, Sparkles, Network, Calendar, Lock } from 'lucide-react';
 import { GithubIcon } from '../components/Icons';
 
 interface ProjectsSectionProps {
@@ -13,95 +13,49 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
   // Custom high-fidelity illustrations/mockups for each project
   const renderProjectVisual = (projectId: string) => {
     switch (projectId) {
-      case 'speed-detection-system':
+      case 'arduino-smart-lock':
         return (
           <div className="w-full h-full bg-[#0a111e] p-5 flex flex-col justify-between font-mono select-none relative overflow-hidden">
             <div className="absolute inset-0 bg-tech-grid opacity-30" />
             
             <div className="relative flex items-center justify-between text-xs border-b border-white/[0.08] pb-2.5">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-white font-semibold">SPEED SENSOR NODE 01</span>
+                <Lock className="w-4 h-4 text-emerald-400" />
+                <span className="text-white font-semibold">SMART LOCK CONTROLLER</span>
               </div>
               <span className="text-[#60A5FA] bg-[#3B82F6]/10 px-2 py-0.5 rounded text-[11px] border border-[#3B82F6]/20">
-                RF 433MHz LINK OK
+                RELAY: SECURED
               </span>
             </div>
 
             <div className="relative my-4 grid grid-cols-2 gap-3 items-center">
-              <div className="p-4 rounded-xl bg-[#111A28] border border-red-500/30">
-                <div className="text-[10px] text-[#94A3B8] uppercase">Vehicle Velocity</div>
-                <div className="text-3xl font-extrabold text-red-400 mt-1">
-                  48.6 <span className="text-sm font-normal text-white">km/h</span>
+              <div className="p-4 rounded-xl bg-[#111A28] border border-emerald-500/30">
+                <div className="text-[10px] text-[#94A3B8] uppercase">Lock Mechanism</div>
+                <div className="text-xl font-extrabold text-emerald-400 mt-1">
+                  SOLENOID 12V
                 </div>
-                <div className="text-[10px] text-red-300 mt-1 flex items-center gap-1">
-                  <span>THRESHOLD: 30 km/h</span> • <span>EXCEEDED</span>
+                <div className="text-[10px] text-emerald-300 mt-1 flex items-center gap-1">
+                  <span>STATUS: LOCKED</span> • <span>FAIL-SECURE</span>
                 </div>
               </div>
 
               <div className="p-4 rounded-xl bg-[#111A28] border border-white/10 flex flex-col justify-between">
                 <div>
-                  <div className="text-[10px] text-[#94A3B8] uppercase">Warning Relay</div>
-                  <div className="text-xs font-bold text-amber-400 mt-1 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                    SIREN + STROBE ACTIVE
+                  <div className="text-[10px] text-[#94A3B8] uppercase">Authentication</div>
+                  <div className="text-xs font-bold text-[#60A5FA] mt-1 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-blue-400" />
+                    RFID / PIN VERIFIED
                   </div>
                 </div>
                 <div className="text-[10px] text-[#64748B] mt-2">
-                  ESP32-CAM: Snapshot #1049 Logged
+                  Response: &lt; 200ms
                 </div>
               </div>
             </div>
 
             <div className="relative p-2 rounded-lg bg-black/40 border border-white/[0.06] text-[11px] text-[#94A3B8] flex items-center justify-between">
-              <span className="text-[#3B82F6]">sqlite3 &gt; INSERT INTO violations ...</span>
-              <span className="text-emerald-400">STATUS: SAVED</span>
-            </div>
-          </div>
-        );
-
-      case 'laundry-management-system':
-        return (
-          <div className="w-full h-full bg-[#0a111e] p-5 flex flex-col justify-between font-sans select-none relative overflow-hidden">
-            <div className="absolute inset-0 bg-tech-grid opacity-25" />
-            
-            <div className="relative flex items-center justify-between text-xs border-b border-white/[0.08] pb-2.5">
-              <div className="flex items-center gap-2">
-                <Shirt className="w-4 h-4 text-[#3B82F6]" />
-                <span className="text-white font-semibold">LAUNDRY OPERATIONS PIPELINE</span>
-              </div>
-              <span className="text-emerald-400 text-[11px] font-mono">14 Orders In Progress</span>
-            </div>
-
-            <div className="relative my-3 grid grid-cols-3 gap-2">
-              <div className="p-2.5 rounded-lg bg-[#111A28] border border-white/[0.08]">
-                <div className="text-[10px] font-semibold text-[#94A3B8] uppercase mb-1">Pickups</div>
-                <div className="p-1.5 rounded bg-white/[0.03] text-[11px] text-white font-medium border border-white/[0.04]">
-                  #L-409 • 8.5 kg
-                  <div className="text-[9px] text-[#64748B]">Rider En Route</div>
-                </div>
-              </div>
-
-              <div className="p-2.5 rounded-lg bg-[#111A28] border border-blue-500/30">
-                <div className="text-[10px] font-semibold text-[#60A5FA] uppercase mb-1">Washing</div>
-                <div className="p-1.5 rounded bg-[#3B82F6]/10 text-[11px] text-blue-200 font-medium border border-[#3B82F6]/20">
-                  #L-408 • Premium
-                  <div className="text-[9px] text-blue-300">Cycle: 24 mins left</div>
-                </div>
-              </div>
-
-              <div className="p-2.5 rounded-lg bg-[#111A28] border border-emerald-500/20">
-                <div className="text-[10px] font-semibold text-emerald-400 uppercase mb-1">Out For Delivery</div>
-                <div className="p-1.5 rounded bg-white/[0.03] text-[11px] text-white font-medium border border-white/[0.04]">
-                  #L-405 • Paid
-                  <div className="text-[9px] text-emerald-300">San Miguel Route</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative p-2 rounded-lg bg-black/40 border border-white/[0.06] text-[11px] text-[#94A3B8] flex items-center justify-between">
-              <span>Flask API / Orders Gateway</span>
-              <span className="text-[#60A5FA] font-mono">Daily Gross: ₱12,450.00</span>
+              <span className="text-[#3B82F6]">arduino &gt; relay.write(HIGH);</span>
+              <span className="text-emerald-400">READY</span>
             </div>
           </div>
         );

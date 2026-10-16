@@ -198,6 +198,30 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   </li>
                 </ul>
               </div>
+
+              {/* Systems & Hardware Project */}
+              <div className="p-4 rounded-xl bg-[#111A28] border border-white/[0.05] mt-3">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-semibold text-white text-xs sm:text-sm">
+                    Arduino-Based Smart Lock Application
+                  </h3>
+                  <span className="text-xs text-[#60A5FA] font-mono">IoT Systems Project • 2026</span>
+                </div>
+                <ul className="space-y-1.5 text-xs text-[#CBD5E1]">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Designed and engineered an automated electronic door lock and physical access security system using an Arduino microcontroller, relay modules, and a 12V solenoid lock.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Programmed embedded C++ firmware with fail-secure mechanisms, lockout protections against brute-force attempts, and visual/audio status feedback.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#3B82F6] font-bold">•</span>
+                    <span>Achieved reliable, sub-second authentication and unlock actuation for keyless residential and office security.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Skills */}

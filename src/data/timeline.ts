@@ -3,29 +3,16 @@ import type { TimelineItem } from '../types';
 export const timelineItems: TimelineItem[] = [
   {
     year: "2026",
-    title: "Capstone Hardware & Network Lead",
-    organization: "Speed Detection & Warning System Prototype",
+    title: "Embedded Systems Developer",
+    organization: "Arduino-Based Smart Lock Application",
     type: "Capstones & Systems",
-    description: "Designed, engineered, and demonstrated an active IoT road safety prototype combining vehicle velocity calculation, RF wireless communication, pedestrian alarm pillars, and ESP32-CAM monitoring.",
+    description: "Designed, engineered, and demonstrated an IoT physical access control system integrating an Arduino microcontroller, electronic relay modules, solenoid lock mechanism, and secure keyless authentication.",
     bullets: [
-      "Interfaced Arduino sensors with 433MHz RF transceivers to transmit low-latency violation signals to pedestrian pillars",
-      "Configured automated camera snapshots and Python desktop data logging using SQLite",
-      "Defended the project successfully, proving reliable trigger response within 180ms"
+      "Interfaced Arduino microcontroller with electronic 12V solenoid lock relays, status LEDs, and authentication sensors",
+      "Programmed embedded C++ firmware with fail-safe lock mechanisms, brute-force lockout protections, and status indicator buzzers",
+      "Achieved instant, sub-second electronic unlock response time with secure access verification"
     ],
-    technologies: ["Arduino", "ESP32-CAM", "RF 433MHz", "Python", "SQLite"]
-  },
-  {
-    year: "2026",
-    title: "Web Application Development",
-    organization: "Laundry Pickup & Delivery Management System",
-    type: "Capstones & Systems",
-    description: "Architected a full-featured web operations platform replacing paper records with automated order tracking, pickup scheduling, weight calculation, and customer receipts.",
-    bullets: [
-      "Constructed Flask backend routes, session security, and SQLite normalized databases",
-      "Built clean, responsive order dispatching views for shop staff and delivery riders",
-      "Implemented dynamic status updates and printable customer invoices"
-    ],
-    technologies: ["Python", "Flask", "SQLite", "JavaScript", "HTML5", "CSS3"]
+    technologies: ["Arduino Uno", "C++ / Embedded", "Relay Modules", "12V Solenoid Lock", "RFID / Keypad", "Hardware Prototyping"]
   },
   {
     year: "2025–2026",
